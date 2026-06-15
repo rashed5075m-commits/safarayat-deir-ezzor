@@ -1,0 +1,19 @@
+name: Magic Unzipper
+on: [workflow_dispatch]
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Unzip Files
+        run: |
+          unzip SuriyaBus_Final_Project.zip
+          mv SuriyaBus_Project/* .
+          rm -rf SuriyaBus_Project SuriyaBus_Final_Project.zip
+      - name: Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Unzipped project files"
+          git push
